@@ -1,0 +1,3 @@
+com\eiji\dev\inventorymanagementsystem\InventoryManagementSystem.class
+com\eiji\dev\inventorymanagementsystem\controllers\Inventory.class
+com\eiji\dev\inventorymanagementsystem\models\Product.class
