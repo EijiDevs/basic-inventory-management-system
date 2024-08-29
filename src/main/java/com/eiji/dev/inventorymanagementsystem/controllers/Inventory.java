@@ -45,6 +45,7 @@ public class Inventory {
                 return validateMessage;
             }
             
+            // TODO: Migrate internal data access in addProduct to use database instead of internal memory
             Product newProduct = new Product(id, name, price, stock);
                 
             products.add(newProduct);
@@ -68,6 +69,7 @@ public class Inventory {
                 // Product must exist
                 if(product.getId() != id) {continue;}
                 
+                //TODO: Migrate internal data access in deleteProductById to use database instead of internal memory
                 products.remove(product);
                 
                 return "Se ha eliminado el producto correctamente.";
@@ -87,6 +89,7 @@ public class Inventory {
      */
     public String listAllProducts(){
         try {
+            //TODO: Migrate internal data access in listAllProducts to use database instead of internal memory
             for(Product product : products){
                 System.out.println(product.toString());
             }
@@ -106,6 +109,7 @@ public class Inventory {
      */
     public String getProductByName(String name){
         try{
+            //TODO: Migrate internal data access in getProductByName to use database instead of internal memory
             for(Product product : products){
                 // Validate that product with that name exists
                 if(product.getName().equalsIgnoreCase(name)){
@@ -138,6 +142,7 @@ public class Inventory {
                 return validateMessage;
             }
             
+            //TODO: Migrate internal data access in updateProductStock to use database instead of internal memory
             for(Product product : products){
                 if(product.getId() != id) {continue;}
                 
