@@ -89,12 +89,13 @@ public class Inventory {
             if(rowsAffected == 0){
                 return "El producto no existe.";
             }
-            
-            return "Se ha eliminado el producto correctamente.";
 
-        } catch(Exception e){
-            return "No se ha podido eliminar el producto.";
+        } catch(SQLException e){
+            e.printStackTrace();
+            return "Error al eliminar el producto: " + e.getMessage();
         }
+        
+        return "Se ha eliminado el producto correctamente.";
     }
     
     /**
