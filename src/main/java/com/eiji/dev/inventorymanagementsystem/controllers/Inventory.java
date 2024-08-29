@@ -69,7 +69,6 @@ public class Inventory {
        return "Se ha agregado el producto correctamente.";
     }
     
-    //TODO: Remove an product of the list
     /**
      *Remove an product of the list by product id
      * 
@@ -98,7 +97,6 @@ public class Inventory {
         }
     }
     
-    //TODO: List all products
     /**
      * List all products
      * 
@@ -116,7 +114,6 @@ public class Inventory {
         }
     }
     
-    //TODO: Search an product by name
     /**
      * Get a product by name
      * 
@@ -139,7 +136,6 @@ public class Inventory {
         }
     }
     
-    //TODO: Update product stock 
     /**
      * Update the stock of the product by id
      * 
