@@ -1,6 +1,9 @@
 package com.eiji.dev.inventorymanagementsystem.controllers;
 
 import com.eiji.dev.inventorymanagementsystem.models.Product;
+import com.eiji.dev.inventorymanagementsystem.utils.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -11,9 +14,16 @@ import java.util.Set;
  */
 public class Inventory {
     private Set<Product> products = new HashSet<Product>();
+    private Connection connection;
     
     public Inventory(){
-        
+        // Create a connection to the database
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
+            System.out.println("Connected to the database successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error connecting with the database.");
+            e.printStackTrace();
+        }
     }
     
     /**
