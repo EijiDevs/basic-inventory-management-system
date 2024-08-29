@@ -22,6 +22,6 @@ To provide a clear understanding of the database structure used in this project,
 - The `id` field serves as the primary key and must be unique across all products.
 - Relationships between entities and other potential tables are visualized here.
 
-> **Note**: Ensure that your database schema aligns with the ERD provided below for optimal functionality and data integrity.
-
-![ER Diagram](https://github.com/EijiDevs/basic-inventory-management-system/blob/main/docs/ER%20Basic%20Inventory%20Management%20System.pdf)
+<p align="center">
+  <img src="https://github.com/EijiDevs/basic-inventory-management-system/blob/main/docs/ER%20Basic%20Inventory%20Management%20System.png" alt="ER Diagram">
+</p>
