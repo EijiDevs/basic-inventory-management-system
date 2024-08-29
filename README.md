@@ -12,3 +12,16 @@ Develop a system for managing the inventory of products in a store. This system 
 - All available products in the store can be listed.
 - The stock quantity of an existing product can be updated. If a product is no longer available, it can be removed from the inventory.
 - Products cannot be removed if they do not exist in the inventory.
+
+## Entity-Relationship Diagram (ERD)
+
+To provide a clear understanding of the database structure used in this project, below is the Entity-Relationship Diagram (ERD) that reflects the "Product" table. The ERD illustrates the relationships and attributes associated with the `Product` entity.
+
+### ERD Overview
+- **Product Table**: Contains fields for `id`, `name`, `price`, and `stock`.
+- The `id` field serves as the primary key and must be unique across all products.
+- Relationships between entities and other potential tables are visualized here.
+
+> **Note**: Ensure that your database schema aligns with the ERD provided below for optimal functionality and data integrity.
+
+![ER Diagram](./docs/ER%20Basic%20Inventory%20Management%20System.pdf)
