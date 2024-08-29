@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -99,20 +100,34 @@ public class Inventory {
     }
     
     /**
-     * List all products
+     * Get all products
      * 
-     * @return A String that indicate the state of the operation
+     * @return A list that contains all the products
      */
-    public String listAllProducts(){
-        try {
-            //TODO: Migrate internal data access in listAllProducts to use database instead of internal memory
-            for(Product product : products){
-                System.out.println(product.toString());
+    public List<Product> getAllProducts(){
+        
+        List<Product> products = null;
+        
+        String SQLQuery = "SELECT * FROM products";
+        
+        try (PreparedStatement ps = connection.prepareStatement(SQLQuery)) {
+
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                Product product = new Product(rs.getInt("id"), rs.getString("name"), rs.getFloat("price"), rs.getInt("stock"));
+                
+                products.add(product);
+                
             }
-            return "Se han listado los productos correctamente.";
-        } catch(Exception e){
-            return "No se ha podido listar los productos.";
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("Error al listar los productos: " + e.getMessage());
         }
+        
+        return products;
     }
     
     /**
