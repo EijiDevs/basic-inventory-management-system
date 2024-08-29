@@ -18,12 +18,8 @@ public class Inventory {
     
     public Inventory(){
         // Create a connection to the database
-        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
-            System.out.println("Connected to the database successfully.");
-        } catch (SQLException e) {
-            System.out.println("Error connecting with the database.");
-            e.printStackTrace();
-        }
+        connection = DatabaseConnection.getInstance().getConnection();
+        System.out.println("Connected to the database successfully.");
     }
     
     /**
