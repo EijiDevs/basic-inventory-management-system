@@ -24,4 +24,4 @@ To provide a clear understanding of the database structure used in this project,
 
 > **Note**: Ensure that your database schema aligns with the ERD provided below for optimal functionality and data integrity.
 
-![ER Diagram](./docs/ER%20Basic%20Inventory%20Management%20System.pdf)
+![ER Diagram](https://github.com/EijiDevs/basic-inventory-management-system/blob/main/docs/ER%20Basic%20Inventory%20Management%20System.pdf)
