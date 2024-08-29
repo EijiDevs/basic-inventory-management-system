@@ -3,6 +3,8 @@ package com.eiji.dev.inventorymanagementsystem.controllers;
 import com.eiji.dev.inventorymanagementsystem.models.Product;
 import com.eiji.dev.inventorymanagementsystem.utils.DatabaseConnection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,27 +34,39 @@ public class Inventory {
      * 
      * @return A String that indicates the state of the operation
      */
-    public String addProduct(int id, String name, double price, int stock){
-        try {
-            Map<String, Object> data = new HashMap<>();
-            data.put("id", id);
-            data.put("price", price);
-            data.put("stock", stock);
+    public String addProduct(int id, String name, float price, int stock) {
+       // Valida los datos del producto
+       Map<String, Object> data = new HashMap<>();
+       data.put("id", id);
+       data.put("name", name);
+       data.put("price", price);
+       data.put("stock", stock);
 
-            // Validate data to an product
-            String validateMessage = validateProductData(data);
-            if(!validateMessage.equals("Valid")){
-                return validateMessage;
-            }
-            
-            // TODO: Migrate internal data access in addProduct to use database instead of internal memory
-            Product newProduct = new Product(id, name, price, stock);
-                
-            products.add(newProduct);
-        } catch(Exception e){
-            return "No se ha podido agregar el producto.";
-        }
-        return "Se ha agregado el producto correctamente.";
+       String validateMessage = validateProductData(data);
+       if (!validateMessage.equals("Valid")) {
+           return validateMessage;
+       }
+
+       String SQLQuery = "INSERT INTO products (name, price, stock) VALUES (?, ?, ?)";
+
+       try (PreparedStatement ps = connection.prepareStatement(SQLQuery)) {
+           ps.setString(1, name);
+           ps.setFloat(2, price);
+           ps.setInt(3, stock);
+
+           int rowsAffected = ps.executeUpdate();
+
+           // Validate that the query affects minimum one row
+           if (rowsAffected == 0) {
+               return "No se ha podido agregar el producto.";
+           }
+
+       } catch (SQLException e) {
+           e.printStackTrace();
+           return "Error al agregar el producto: " + e.getMessage();
+       }
+
+       return "Se ha agregado el producto correctamente.";
     }
     
     //TODO: Remove an product of the list
