@@ -39,6 +39,18 @@ public class Product {
     public void setStock(int stock){
         this.stock = stock;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
     
     @Override
     public String toString() {

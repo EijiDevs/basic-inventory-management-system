@@ -4,7 +4,6 @@ import com.eiji.dev.inventorymanagementsystem.utils.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 /**
- *
  * @author Esteban Padilla
  */
 
