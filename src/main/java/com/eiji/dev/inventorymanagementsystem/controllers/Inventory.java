@@ -78,18 +78,21 @@ public class Inventory {
      *@return A String that indicates the state of the operation
      */
     public String deleteProductById(int id){
-        try {
-            for(Product product : products){
-                // Product must exist
-                if(product.getId() != id) {continue;}
-                
-                //TODO: Migrate internal data access in deleteProductById to use database instead of internal memory
-                products.remove(product);
-                
-                return "Se ha eliminado el producto correctamente.";
+        
+        String SQLQuery = "DELETE FROM products WHERE id = ?;";
+        
+        try(PreparedStatement ps = connection.prepareStatement(SQLQuery)) {
+            
+            ps.setInt(1, id);
+            
+            int rowsAffected = ps.executeUpdate();
+            
+            if(rowsAffected == 0){
+                return "El producto no existe.";
             }
             
-            return "El producto no existe.";
+            return "Se ha eliminado el producto correctamente.";
+
         } catch(Exception e){
             return "No se ha podido eliminar el producto.";
         }
