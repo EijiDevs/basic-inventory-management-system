@@ -179,7 +179,7 @@ public class Inventory {
      */
     public String validateProductData(Map<String, Object> data) {
         if (data.containsKey("price")) {
-            double price = (double) data.get("price");
+            float price = (float) data.get("price");
             if (price <= 0) {
                 return "El precio debe ser un valor mayor a 0.";
             }

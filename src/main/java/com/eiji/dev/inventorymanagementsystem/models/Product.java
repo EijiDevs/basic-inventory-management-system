@@ -10,10 +10,10 @@ package com.eiji.dev.inventorymanagementsystem.models;
 public class Product {
     private int id;
     private String name;
-    private double price;
+    private float price;
     private int stock;
     
-    public Product(int id, String name, double price, int stock){
+    public Product(int id, String name, float price, int stock){
         this.id = id;
         this.name = name;
         this.price = price;
@@ -28,7 +28,7 @@ public class Product {
         return name;
     }
     
-    public double getPrice(){
+    public float getPrice(){
         return price;
     }
     
@@ -48,7 +48,7 @@ public class Product {
         this.name = name;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
     
