@@ -51,9 +51,9 @@ public class Inventory {
        String SQLQuery = "INSERT INTO products (name, price, stock) VALUES (?, ?, ?)";
 
        try (PreparedStatement ps = connection.prepareStatement(SQLQuery)) {
-           ps.setString(1, name);
-           ps.setFloat(2, price);
-           ps.setInt(3, stock);
+           ps.setString(0, name);
+           ps.setFloat(1, price);
+           ps.setInt(2, stock);
 
            int rowsAffected = ps.executeUpdate();
 
@@ -83,7 +83,7 @@ public class Inventory {
         
         try(PreparedStatement ps = connection.prepareStatement(SQLQuery)) {
             
-            ps.setInt(1, id);
+            ps.setInt(0, id);
             
             int rowsAffected = ps.executeUpdate();
             
@@ -124,7 +124,7 @@ public class Inventory {
             
         } catch(SQLException e){
             e.printStackTrace();
-            System.out.println("Error al listar los productos: " + e.getMessage());
+            System.out.println("Error al recuperar los productos: " + e.getMessage());
         }
         
         return products;
@@ -137,19 +137,28 @@ public class Inventory {
      * 
      * @return A String that indicates the state of the operation
      */
-    public String getProductByName(String name){
-        try{
-            //TODO: Migrate internal data access in getProductByName to use database instead of internal memory
-            for(Product product : products){
-                // Validate that product with that name exists
-                if(product.getName().equalsIgnoreCase(name)){
-                    return "El producto se ha recuperado correctamente. " + product.toString();
-                }
+    public Product getProductByName(String name){
+        
+        Product product = null;
+        
+        String SQLQuery = "SELECT * FROM products WHERE name = ?";
+        
+        try (PreparedStatement ps = connection.prepareStatement(SQLQuery)){
+            
+            ps.setString(0, name);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                product = new Product(rs.getInt("id"), rs.getString("name"), rs.getFloat("price"), rs.getInt("stock"));
             }
-            return "El producto no existe.";
-        }catch(Exception e){
-            return "El producto no existe.";
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("Error al recuperar el producto: " + e.getMessage());
         }
+        
+        return product;
     }
     
     /**
