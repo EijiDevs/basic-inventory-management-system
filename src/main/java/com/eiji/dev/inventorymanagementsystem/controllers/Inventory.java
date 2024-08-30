@@ -135,7 +135,7 @@ public class Inventory {
      * 
      * @param name the name of the product in upper or lower case
      * 
-     * @return A String that indicates the state of the operation
+     * @return The object of the recovered product
      */
     public Product getProductByName(String name){
         
