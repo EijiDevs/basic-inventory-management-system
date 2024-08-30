@@ -224,15 +224,6 @@ public class Inventory {
             }
         }
 
-        if (data.containsKey("id")) {
-            int id = (int) data.get("id");
-            for (Product product : products) {
-                if (product.getId() == id) {
-                    return "El producto debe tener un identificador único.";
-                }
-            }
-        }
-
         return "Valid";
     }
 }
