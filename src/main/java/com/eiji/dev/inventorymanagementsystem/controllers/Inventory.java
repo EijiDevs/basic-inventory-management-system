@@ -170,28 +170,36 @@ public class Inventory {
      * @return A String that indicates the state of the operation
      */
     public String updateProductStock(int id, int stock){
-        try {
-            Map<String, Object> data = new HashMap<>();
-            data.put("id", id);
-            data.put("stock", stock);
+        
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", id);
+        data.put("stock", stock);
             
-            String validateMessage = validateProductData(data);
-            if(!validateMessage.equals("Valid")){
-                return validateMessage;
-            }
-            
-            //TODO: Migrate internal data access in updateProductStock to use database instead of internal memory
-            for(Product product : products){
-                if(product.getId() != id) {continue;}
-                
-                product.setStock(stock);
-                
-                return "El stock del producto se ha actualizado correctamente.";
-            }
-            return "El producto no existe.";
-        } catch (Exception e) {
-            return "No se ha podido actualizar el stock del producto.";
+        String validateMessage = validateProductData(data);
+        if(!validateMessage.equals("Valid")){
+            return validateMessage;
         }
+            
+        String SQLQuery = "UPDATE products SET stock = ? WHERE id = ?;";
+        
+        
+        try (PreparedStatement ps = connection.prepareStatement(SQLQuery)){
+            
+            ps.setInt(0, stock);
+            ps.setInt(1, id);
+            
+            int rowsAffected = ps.executeUpdate();
+            
+            if(rowsAffected == 0){
+                return "El producto no existe.";
+            }
+                
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al actualizar el producto: " + e.getMessage());
+        }
+        
+        return "El stock del producto se ha actualizado correctamente.";
     }
     
     /**
