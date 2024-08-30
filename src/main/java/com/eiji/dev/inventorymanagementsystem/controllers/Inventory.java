@@ -16,7 +16,7 @@ import java.util.Set;
  * @author Esteban Padilla
  */
 public class Inventory {
-    private Set<Product> products = new HashSet<Product>();
+    
     private Connection connection;
     
     public Inventory(){
