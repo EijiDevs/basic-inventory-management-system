@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -51,9 +52,9 @@ public class Inventory {
        String SQLQuery = "INSERT INTO products (name, price, stock) VALUES (?, ?, ?)";
 
        try (PreparedStatement ps = connection.prepareStatement(SQLQuery)) {
-           ps.setString(0, name);
-           ps.setFloat(1, price);
-           ps.setInt(2, stock);
+           ps.setString(1, name);
+           ps.setFloat(2, price);
+           ps.setInt(3, stock);
 
            int rowsAffected = ps.executeUpdate();
 
@@ -83,7 +84,7 @@ public class Inventory {
         
         try(PreparedStatement ps = connection.prepareStatement(SQLQuery)) {
             
-            ps.setInt(0, id);
+            ps.setInt(1, id);
             
             int rowsAffected = ps.executeUpdate();
             
@@ -106,7 +107,7 @@ public class Inventory {
      */
     public List<Product> getAllProducts(){
         
-        List<Product> products = null;
+        List<Product> products = new ArrayList<>();
         
         String SQLQuery = "SELECT * FROM products";
         
@@ -141,11 +142,11 @@ public class Inventory {
         
         Product product = null;
         
-        String SQLQuery = "SELECT * FROM products WHERE name = ?";
+        String SQLQuery = "SELECT * FROM products WHERE name = ?;";
         
         try (PreparedStatement ps = connection.prepareStatement(SQLQuery)){
             
-            ps.setString(0, name);
+            ps.setString(1, name);
             
             ResultSet rs = ps.executeQuery();
             
@@ -185,8 +186,8 @@ public class Inventory {
         
         try (PreparedStatement ps = connection.prepareStatement(SQLQuery)){
             
-            ps.setInt(0, stock);
-            ps.setInt(1, id);
+            ps.setInt(1, stock);
+            ps.setInt(2, id);
             
             int rowsAffected = ps.executeUpdate();
             
